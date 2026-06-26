@@ -1,0 +1,57 @@
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+         <link rel="stylesheet" href="/styles.css">
+    </head>
+    <body>
+        <div class="main">
+             <form method="post" action="">
+                <h1>Mission Complete</h1>
+                <h2 class="comment1">Date Acquired!</h2>
+                <ul>
+                    <li><span ><%=username %></span></li>
+                    <li>Time:<%=timeChosen%></li>
+                    <li>Date: <%=new Date(dateChosen).toDateString() %></li>
+                    <li>food:<img src=<%=src%> /></li>
+                </ul>
+                <button type="submit">Check up on <%=username %></button>
+            </form>
+            </div>
+             <audio  id="music" preload="auto" loop>
+        <source src="/seven-years-old.mp3" type="audio/mpeg" loop>
+       </audio>
+       <p id="hope"></p>
+            </div>
+        </div>
+    </body>
+    <script>
+    
+ const music = document.getElementById("music");
+  
+ 
+  if (sessionStorage.getItem("music-on") !== "true") {
+
+    music.pause();
+  } else {
+  
+    music.volume = 0.1;
+    music.loop = true;
+    const savedTime = parseFloat(sessionStorage.getItem("music-time") || 0);
+   
+    music.addEventListener("canplay", () => {
+      music.currentTime = savedTime;
+      music.play().catch(() => {});
+    }, { once: true });
+    
+  
+    setInterval(() => {
+      if (!music.paused) {
+        sessionStorage.setItem("music-time", music.currentTime);
+      }
+    }, 1000);
+  }
+    </script>
+    
+</html>

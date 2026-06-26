@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+         <link rel="stylesheet" href="/styles.css">
+    </head>
+    <body>
+        <div class="hearts"></div>
+        <div class="main">
+            <h1>Wow you Fast</h1>
+            <h2 class="comment1">The button may run.... But it will Never Hide</h2>
+            <h2 class="comment"><span>If you say YES i"ll buy you flowers</span></h2></h2>
+
+
+            <div class="answer">
+                <a href="/comment1" id="yes">Yes</a>
+            <a href="/mission-failed" id="no">No... Again</a>
+
+            </div>
+       <audio  id="music" preload="auto" loop>
+        <source src="/seven-years-old.mp3" type="audio/mpeg" loop>
+       </audio>
+            </div>
+        </div>
+    </body>
+    <script>
+          const yes=document.getElementById("yes")
+      const no=document.getElementById("no")
+      const main=document.querySelector(".main")
+
+
+    
+      const run=(btn)=>{
+const maxX=main.clientWidth-btn.clientWidth-20
+      const maxY=main.clientHeight-btn.clientHeight-40
+
+
+      const randomX=Math.random()*maxX
+      const randomY=Math.random()*maxY
+      btn.style.position="relative"
+      btn.style.transform=`translate(${randomX}px,${randomY}px)`
+      btn.style.width="180px"
+      btn.style.height="50px"
+
+      }
+
+        no.addEventListener("mouseover",()=>{
+       run(no)
+      })
+
+
+no.addEventListener("touchstart",(event)=>{
+    event.preventDefault()
+    run(no)
+})
+
+     
+    </script>
+</html>

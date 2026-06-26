@@ -1,0 +1,86 @@
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+         <link rel="stylesheet" href="/styles.css">
+    </head>
+    <body>
+        <div class="main food-container">
+             <form method="post" class="food-form"  action="/food">
+                <h1>lets Talk abood food cavings</h1>
+            <div class="container">
+                <input type="radio" id="fts" name="food" class="food" Value="FTS" value="fts"/>
+                <label for="fts" class="icon" >FTS
+                    <img src="/kota.jpg" alt="kota" />
+                </label>
+
+                <input type="radio" id="ice-cream" name="food" class="food" value="ice-cream"/>
+                <label for="ice-cream" class="icon" >Ice Cream 
+                    <img src="/ice-cream.jpeg" alt="ice cream" />
+                </label>
+
+                <input type="radio" id="pizza" name="food" class="food" value="pizza"/>
+                <label for="pizza" class="icon" >Pizza
+                    <img src="/pizza.jpg" alt="pizza" />
+                </label>
+
+                <input type="radio" id="burger" name="food" class="food" value="burger"/>
+                <label for="burger" class="icon" >Burger
+                    <img src="/burger.jpeg" alt="burger" />
+                </label>
+
+                <input type="radio" id="meat" name="food" class="food" value="kasi chill"/>
+                <label for="meat" class="icon" >Kasi chill
+                    <img src="/loal.jpg" alt="meat" />
+                </label>
+
+             
+                <input type="radio" id="suprise" name="food" class="food" value="suprise"/>
+                <label for="suprise" class="icon" >I'll choose
+                    <img src="/mystery.webp" alt="surprise" />
+                </label>
+            </div>
+          
+<a type="sub"></a>
+            <button type="submit">GO</button>
+        </form>
+         <audio  id="music" preload="auto" loop>
+        <source src="/seven-years-old.mp3" type="audio/mpeg" loop>
+       </audio>
+
+            </div>
+       <p id="hope"></p>
+            </div>
+        </div>
+    </body>
+      <script>
+        
+     const music = document.getElementById("music");
+  
+  // Only start music if it wasn't playing before
+  if (sessionStorage.getItem("music-on") !== "true") {
+    // First time - do nothing. Music starts only on Yes click
+    music.pause();
+  } else {
+    // Music was playing - resume from saved time
+    music.volume = 0.1;
+    music.loop = true;
+    const savedTime = parseFloat(sessionStorage.getItem("music-time") || 0);
+    
+    // Wait for audio to load, then jump to saved time
+    music.addEventListener("canplay", () => {
+      music.currentTime = savedTime;
+      music.play().catch(() => {});
+    }, { once: true });
+    
+    // Keep saving current time every second
+    setInterval(() => {
+      if (!music.paused) {
+        sessionStorage.setItem("music-time", music.currentTime);
+      }
+    }, 1000);
+  }
+     
+    </script>
+</html>

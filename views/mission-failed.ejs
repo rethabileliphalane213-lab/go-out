@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+         <link rel="stylesheet" href="/styles.css">
+    </head>
+    <body>
+        <div class="main">
+            <h1>Mission Failed</h1>
+           <h2 class="comment">But the heart wont sop floating.....and neithe will I</h2>
+            <div class="answer">
+                <a href="/" id="yes">Return Home</a>
+            <audio  id="music" preload="auto" loop>
+        <source src="/seven-years-old.mp3" type="audio/mpeg" loop>
+       </audio>
+
+            </div>
+       <p id="hope"></p>
+            </div>
+        </div>
+    </body>
+    <script>
+          const yes=document.getElementById("yes")
+      const no=document.getElementById("no")
+      const main=document.querySelector(".main")
+
+
+    
+      const run=(btn)=>{
+const maxX=main.clientWidth-btn.clientWidth-20
+      const maxY=main.clientHeight-btn.clientHeight-60
+
+      const randomX=Math.random()*maxX
+      const randomY=Math.random()*maxY
+      btn.style.position="absolute"
+      btn.style.transform=`translate(${randomX}px,${randomY}px)`
+
+      }
+
+        no.addEventListener("mouseover",()=>{
+       run(no)
+      })
+
+
+no.addEventListener("touchstart",(event)=>{
+    event.preventDefault()
+    run(no)
+})
+     
+    </script>
+    </html>

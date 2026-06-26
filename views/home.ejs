@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+         <link rel="stylesheet" href="/styles.css">
+    </head>
+    <body>
+        <div class="hearts"></div>
+        <div class="main">
+            <h1>Will you go out on a <span>Date</span> with Me?</h1>
+
+            <div class="answer">
+                <a href="/comment1" id="yes">Yes</a>
+            <a href="./no" id="no">No</a>
+
+            </div>
+       <audio  id="music" preload="auto" loop>
+        <source src="/seven-years-old.mp3" type="audio/mpeg" loop>
+       </audio>
+            </div>
+        </div>
+    </body>
+    <script>
+       const yes=document.getElementById("yes")
+      const no=document.getElementById("no")
+      const main=document.querySelector(".main")
+
+
+    
+      const run=(btn)=>{
+const maxX=main.clientWidth-btn.clientWidth-20
+      const maxY=main.clientHeight-btn.clientHeight-40
+
+      const randomX=Math.random()*maxX
+      const randomY=Math.random()*maxY
+      btn.style.position="relative"
+      btn.style.transform=`translate(${randomX}px,${randomY}px)`
+            btn.style.width="180px"
+      btn.style.height="50px"
+
+      }
+
+        no.addEventListener("mouseover",()=>{
+       run(no)
+      })
+
+
+no.addEventListener("touchstart",(event)=>{
+    event.preventDefault()
+    run(no)
+})
+     const music = document.getElementById("music");
+  
+  yes.addEventListener("click",(e)=>{
+    e.preventDefault()
+    music.volume=0.1
+    music.loop=true
+    music.play()
+
+    sessionStorage.setItem("music-on","true")
+    const saveTime=setInterval(()=>{
+      sessionStorage.setItem("music-time",music.currentTime)},500)
+
+      setTimeout(()=>{
+        clearInterval(saveTime)
+        window.location.href=yes.href;
+        
+      },2000)
+  })
+     
+    </script>
+</html>
