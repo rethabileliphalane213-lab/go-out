@@ -89,7 +89,7 @@ imageSrc="/kota.jpg"
         imageSrc="/burger.jpeg"
     }
     else if(food==="kasi chill"){
-        imageSrc="/loal.jpg"
+        imageSrc="/kasi chill.jpg"
     }else{
         imageSrc="/mystery.webp"
     }

@@ -48,24 +48,7 @@ no.addEventListener("touchstart",(event)=>{
     event.preventDefault()
     run(no)
 })
-     const music = document.getElementById("music");
-  
-  yes.addEventListener("click",(e)=>{
-    e.preventDefault()
-    music.volume=0.1
-    music.loop=true
-    music.play()
-
-    sessionStorage.setItem("music-on","true")
-    const saveTime=setInterval(()=>{
-      sessionStorage.setItem("music-time",music.currentTime)},500)
-
-      setTimeout(()=>{
-        clearInterval(saveTime)
-        window.location.href=yes.href;
-        
-      },2000)
-  })
+ 
      
     </script>
 </html>

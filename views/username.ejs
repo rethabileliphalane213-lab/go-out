@@ -19,11 +19,11 @@
                 <input type="text" name="name" id="name">
             </div>
 
-            <button type="submit">Finalise</button>
+            <button type="submit" id="btn">Finalise</button>
         </form>
 
          <audio  id="music" preload="auto" loop>
-        <source src="/seven-years-old.mp3" type="audio/mpeg" loop>
+        <source src="/fade-away.mp3" type="audio/mpeg" loop>
        </audio>
 
             </div>
@@ -32,31 +32,29 @@
         </div>
     </body>
       <script>
+        const form = document.querySelector("form");
+        btn=document.getElementById("btn")
  const music = document.getElementById("music");
   
-  // Only start music if it wasn't playing before
-  if (sessionStorage.getItem("music-on") !== "true") {
-    // First time - do nothing. Music starts only on Yes click
-    music.pause();
-  } else {
-    // Music was playing - resume from saved time
-    music.volume = 0.1;
+  
+btn.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    music.volume = 0.4;
     music.loop = true;
-    const savedTime = parseFloat(sessionStorage.getItem("music-time") || 0);
-    
-    // Wait for audio to load, then jump to saved time
-    music.addEventListener("canplay", () => {
-      music.currentTime = savedTime;
-      music.play().catch(() => {});
-    }, { once: true });
-    
-    // Keep saving current time every second
-    setInterval(() => {
-      if (!music.paused) {
+    music.play();
+
+    sessionStorage.setItem("music-on", "true");
+
+    const saveTime = setInterval(() => {
         sessionStorage.setItem("music-time", music.currentTime);
-      }
-    }, 1000);
-  }
+    }, 500);
+
+    setTimeout(() => {
+        clearInterval(saveTime);
+        form.submit();
+    }, 2000);
+});
      
     </script>
 </html>

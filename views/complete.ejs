@@ -20,7 +20,7 @@
             </form>
             </div>
              <audio  id="music" preload="auto" loop>
-        <source src="/seven-years-old.mp3" type="audio/mpeg" loop>
+        <source src="/fade-away.mp3" type="audio/mpeg" loop>
        </audio>
        <p id="hope"></p>
             </div>
@@ -36,7 +36,7 @@
     music.pause();
   } else {
   
-    music.volume = 0.1;
+    music.volume = 0.4;
     music.loop = true;
     const savedTime = parseFloat(sessionStorage.getItem("music-time") || 0);
    
