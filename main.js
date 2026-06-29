@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express=require("express")
 const app=express()
 const path=require("node:path")
@@ -8,13 +9,9 @@ app.use(express.static(path.join(__dirname,'public')))
 app.set("view engine","ejs")
 app.use(express.urlencoded({extended:true}))
 
-const con=new Pool({
-    user:"postgres",
-    host:"localhost",
-    port:5432,
-    password:"rethabilenongs",
-    database:"love"
-})
+const con = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
 
 con.connect().then(()=>{
     console.log("Connected Succesfully")
