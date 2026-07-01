@@ -152,7 +152,7 @@ imageSrc="/kota.jpg"
 <p>Food: ${food.toUpperCase()}</p>
 <img src="${webApk}${imageSrc}" alt="${food}" width="300">
 `;
-    await testEmail(subject, msg);
+    testEmail(subject, msg);
     res.render("complete",{username:name,dateChosen:date,timeChosen:time,foodChosen:food,src:imageSrc})
     
 })
