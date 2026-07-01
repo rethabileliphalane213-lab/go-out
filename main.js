@@ -1,8 +1,10 @@
-require("dotenv").config();
+
 const express=require("express")
 const app=express()
 const path=require("node:path")
 const {Pool}=require("pg")
+const nodemailer=require("nodemailer")
+require("dotenv").config();
 
 app.set("views", path.join(__dirname, "views"))
 app.use(express.static(path.join(__dirname,'public')))
@@ -18,6 +20,41 @@ con.connect().then(()=>{
 }).catch(()=>{
     console.log("connecting Failed!!!")
 })
+
+
+const transporter = nodemailer.createTransport({
+    service:"gmail",
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false, // use STARTTLS (upgrade connection to TLS after connecting)
+  auth: {
+    user: process.env.MY_ACCOUNT,
+    pass: process.env.PASSWORD,
+  },
+});
+
+async function testEmail(subject,html) {
+  try {
+    await transporter.sendMail({
+      from: process.env.MY_ACCOUNT,
+      to: process.env.MY_ACCOUNT,
+      subject: subject,
+      html,
+    });
+
+    console.log("Email sent");
+  } catch (err) {
+    console.error(err);
+  }
+}
+transporter.verify((error, success) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("SMTP Ready");
+  }
+});
+
 
 
 //////////////////////////ASYNC FUNCTINS///////////////////////
@@ -71,6 +108,9 @@ app.post("/food",async(req,res)=>{
 app.get("/username",(req,res)=>{
     res.render("username")
 })
+
+
+const webApk="https://go-out.onrender.com/"
 let imageSrc=""
 app.post("/username",async(req,res)=>{
     
@@ -93,7 +133,17 @@ imageSrc="/kota.jpg"
     }else{
         imageSrc="/mystery.webp"
     }
+    const subject=`${name} Said Yes To the Date.Isn't that wonderful`
+    const msg = `
+<h2>Date Confirmed!</h2>
+<p>The Date is on: ${new Date(date).toDateString()}</p>
+<p>Time: ${time}</p>
+<p>Food: ${food.toUpperCase()}</p>
+<img src="${webApk}${imageSrc}" alt="${food}" width="300">
+`;
+    testEmail(subject,msg)
     res.render("complete",{username:name,dateChosen:date,timeChosen:time,foodChosen:food,src:imageSrc})
+    
 })
 
 app.get("/complete",async(req,res)=>{
