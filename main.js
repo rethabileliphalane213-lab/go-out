@@ -110,6 +110,13 @@ app.get("/username",(req,res)=>{
 })
 
 
+
+
+
+
+console.log("MY_ACCOUNT:", process.env.MY_ACCOUNT);
+console.log("PASSWORD exists:", !!process.env.PASSWORD);
+
 const webApk="https://go-out.onrender.com/"
 let imageSrc=""
 app.post("/username",async(req,res)=>{
