@@ -35,10 +35,19 @@
         const form = document.querySelector("form");
         btn=document.getElementById("btn")
  const music = document.getElementById("music");
+ 
+ const phone=document.getElementById("phone")
+    const name=document.getElementById("name")
+
   
-  
-btn.addEventListener("click", (e) => {
+ btn.addEventListener("click", (e) => {
     e.preventDefault();
+
+   
+    if (!name.value || !phone.value) {
+        alert("Please enter both your name and phone number");
+        return;
+    }
 
     music.volume = 0.4;
     music.loop = true;

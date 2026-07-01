@@ -31,7 +31,15 @@
     </body>
       <script>
         
-    
+    const date=document.getElementById("date")
+    const time=document.getElementById("time")
+
+    document.querySelector("form").addEventListener("submit", function (e) {
+    if (!date.value || !time.value) {
+        e.preventDefault();
+        alert("Please enter both date and time");
+    }
+});
      
     </script>
 </html>
