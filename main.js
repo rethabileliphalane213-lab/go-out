@@ -33,17 +33,21 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-async function testEmail(subject,html) {
+async function testEmail(subject, html) {
   try {
-    await transporter.sendMail({
+    console.log("Attempting email...");
+
+    const info = await transporter.sendMail({
       from: process.env.MY_ACCOUNT,
       to: process.env.MY_ACCOUNT,
-      subject: subject,
+      subject,
       html,
     });
 
-    console.log("Email sent");
+    console.log("Email sent!");
+    console.log(info);
   } catch (err) {
+    console.error("EMAIL ERROR:");
     console.error(err);
   }
 }
@@ -165,7 +169,7 @@ app.get("/mission-failed",(req,res)=>{
     res.render("mission-failed")
 })
 
-port=4000||5000
+const port = process.env.PORT || 4000;
 
 app.listen(port,()=>{
     console.log(`app is runnng on..... ${port}`)
